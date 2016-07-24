@@ -1,7 +1,6 @@
 package com.company;
 
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class Main {
 
@@ -10,6 +9,9 @@ public class Main {
     static long[] classdates;
 
     public static void generateClassesNames(int count){
+
+        Random random = new Random();
+
         for(int i=0;i<count;i++){
             classnames[i]=UUID.randomUUID().toString().replaceAll("-","");
             classdates[i]=System.currentTimeMillis();
@@ -19,7 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
         int countOfClasses=0;
-	    System.out.print("Input count of classes:");
+        System.out.print("Input count of classes:");
         Scanner in = new Scanner(System.in);
         countOfClasses=in.nextInt();
 
@@ -33,6 +35,14 @@ public class Main {
 
         MySearcher mySearcher = new MySearcher();
         mySearcher.refresh(classnames,classdates);
+        String[] massiv;
+        massiv=mySearcher.lazyGuess("00a");
+
+        for(String string:massiv){
+            System.out.println(string);
+        }
+
+        //System.out.println("Массив содержит "+mySearcher.calculateCount("00000000000000000000000000000000")+ " включений слова 00a");
 
     }
 }
