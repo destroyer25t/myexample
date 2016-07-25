@@ -63,7 +63,7 @@ public class MySearcher implements ISearcher {
         return false;
     }
 
-    public class innerClass{
+    public static class innerClass{
         String nameOfClass;
         long date;
 
