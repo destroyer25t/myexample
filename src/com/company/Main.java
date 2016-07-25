@@ -36,7 +36,7 @@ public class Main {
         MySearcher mySearcher = new MySearcher();
         mySearcher.refresh(classnames,classdates);
         String[] massiv;
-        massiv=mySearcher.lazyGuess("00a");
+        massiv=mySearcher.usingInnerClassGuess("00a");
 
         for(String string:massiv){
             System.out.println(string);
