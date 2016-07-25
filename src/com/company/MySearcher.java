@@ -9,9 +9,6 @@ import java.util.HashMap;
  * Created by tailer_d on 23.07.2016.
  */
 public class MySearcher implements ISearcher {
-    String[] innerClassNames;
-    long[] innerClassDates;
-    HashMap<String, Long> hashMapClasses;
 
     innerClass[] massivInnerClass;
 
@@ -27,22 +24,11 @@ public class MySearcher implements ISearcher {
             innerClass iC=new innerClass(classNames[i],modificationDates[i]);
             massivInnerClass[i]=iC;
         }
-
-        //innerClassNames = classNames;
-        //innerClassDates=modificationDates;
-
-        /*hashMapClasses=new HashMap<>(lenghtOfClassNames);
-        for(int i=0;i<lenghtOfClassNames;i++){
-            hashMapClasses.put(classNames[i],modificationDates[i]);
-        }
-        */
-
-        //Arrays.sort(classNames);
-        //Arrays.sort(innerClassDates);
-        Arrays.sort(massivInnerClass);
+        NodeDjkstraComparator comparator = new NodeDjkstraComparator();
+        Arrays.sort(massivInnerClass,comparator);
 
         long endTime=System.currentTimeMillis()-startTime;
-        System.out.println("Время создания HashMap:"+endTime);
+        System.out.println("Время создания массива объектов:"+endTime);
     }
 
     @Override
@@ -50,39 +36,6 @@ public class MySearcher implements ISearcher {
         String[] foundedVariants=new String[12];
 
         return new String[0];
-    }
-
-    public String[] usingStringGuess(String start){
-        String[] foundedVariants=new String[12];
-        long startTime=System.currentTimeMillis();
-
-        int counter=0;
-        for(int i=0;i<innerClassDates.length&&counter<12;i++){
-            if(isContained(innerClassNames[i],start)) {
-                foundedVariants[counter++]=innerClassNames[i];
-            }
-        }
-
-        long endTime=System.currentTimeMillis()-startTime;
-        System.out.println("Время полного прогона с поиском:"+endTime);
-        return foundedVariants;
-    }
-
-    public String[] usingDatesGuess(String start){
-        String[] foundedVariants=new String[12];
-        long startTime=System.currentTimeMillis();
-        innerClass[] allInfoMassiv=new innerClass[12];
-
-        int counter=0;
-        for(int i=0;i<innerClassNames.length&&counter<12;i++){
-            if(isContained(innerClassNames[i],start)) {
-                foundedVariants[counter++]=innerClassNames[i];
-            }
-        }
-
-        long endTime=System.currentTimeMillis()-startTime;
-        System.out.println("Время поиска в отсортированном по дате массиву:"+endTime);
-        return foundedVariants;
     }
 
     public String[] usingInnerClassGuess(String start){
@@ -119,5 +72,17 @@ public class MySearcher implements ISearcher {
             this.date=inp2;
         }
 
+    }
+
+    class NodeDjkstraComparator implements Comparator<innerClass> {
+        @Override
+        public int compare(innerClass o1, innerClass o2) {
+            int result;
+            result=Long.compare(o1.date,o2.date);
+            if(result==0){
+                result=o1.nameOfClass.compareTo(o2.nameOfClass);
+            }
+            return result;
+        }
     }
 }
