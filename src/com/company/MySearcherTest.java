@@ -2,6 +2,8 @@ package com.company;
 
 import org.junit.Assert;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 /**
@@ -80,7 +82,13 @@ public class MySearcherTest {
     public void usingInnerClassGuess() throws Exception {
         mySearcher.refresh(classnames,classdates);
         String[] massiv=mySearcher.usingInnerClassGuess("KA");
-        Assert.assertArrayEquals( testStringMassiv, massiv );
+        assertTrue(Arrays.equals( testStringMassiv, massiv ));
+    }
+
+    @org.junit.Test(expected = IllegalArgumentException.class)
+    public void uncorrectedRefresh() {
+        long[] longs = new long[2];
+        mySearcher.refresh(classnames,longs);
     }
 
 }
