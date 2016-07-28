@@ -44,8 +44,7 @@ public class Main {
         MySearcher mySearcher = new MySearcher();
         mySearcher.refresh(classnames,classdates);
         String[] massiv;
-        massiv=mySearcher.usingInnerClassGuess("00a");
-
+        massiv=mySearcher.guess("00afsfasf");
 
         for(String string:massiv){
             System.out.println(string);
@@ -53,7 +52,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        testing();
-        //standartExecution();
+        //testing();
+        standartExecution();
     }
 }

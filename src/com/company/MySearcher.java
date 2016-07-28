@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by tailer_d on 23.07.2016.
@@ -43,9 +40,32 @@ public class MySearcher implements ISearcher {
 
     @Override
     public String[] guess(String start) {
-        String[] foundedVariants = new String[12];
+        if (start == null || start.length() < 1 || start.length() > 32) {
+            return new String[]{"Classes not found"};
+        }
 
-        return new String[0];
+        LinkedList<String> lnkd=new LinkedList<>();
+
+        String[] foundedVariants;
+        long startTime = System.currentTimeMillis();
+
+        int counter = 0;
+        for (int i = 0; i < massivInnerClass.length && counter < 12; i++) {
+            if (isContained(massivInnerClass[i].nameOfClass, start)) {
+                lnkd.add(massivInnerClass[i].nameOfClass);
+            }
+        }
+
+        long endTime = System.currentTimeMillis() - startTime;
+        System.out.println("Время поиска в массиве объектов StringLong:" + endTime);
+        if (lnkd.size() < 1) {
+            return new String[]{"Classes not found"};
+        }
+        else{
+            foundedVariants=new String[lnkd.size()];
+            foundedVariants=lnkd.toArray(foundedVariants);
+        }
+        return foundedVariants;
     }
 
     public String[] usingInnerClassGuess(String start) {
