@@ -2,9 +2,6 @@ package com.company;
 
 import java.util.*;
 
-/**
- * Created by tailer_d on 23.07.2016.
- */
 public class MySearcher implements ISearcher {
 
     innerClass[] massivInnerClass;
