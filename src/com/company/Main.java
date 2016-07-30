@@ -18,14 +18,6 @@ public class Main {
         }
     }
 
-    public static void testing(){
-        JUnitCore runner = new JUnitCore();
-        Result result = runner.run(MySearcherTest.class);
-        System.out.println("run tests: " + result.getRunCount());
-        System.out.println("failed tests: " + result.getFailureCount());
-        System.out.println("ignored tests: " + result.getIgnoreCount());
-        System.out.println("success: " + result.wasSuccessful());
-    }
 
     public static void standartExecution(){
         int countOfClasses;
@@ -44,7 +36,7 @@ public class Main {
         MySearcher mySearcher = new MySearcher();
         mySearcher.refresh(classnames,classdates);
         String[] massiv;
-        massiv=mySearcher.guess("00afsfasf");
+        massiv=mySearcher.guess("a5f");
 
         for(String string:massiv){
             System.out.println(string);
@@ -52,7 +44,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //testing();
         standartExecution();
     }
 }

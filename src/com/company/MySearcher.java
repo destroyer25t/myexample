@@ -46,15 +46,17 @@ public class MySearcher implements ISearcher {
         String[] foundedVariants;
         long startTime = System.currentTimeMillis();
 
-        int counter = 0;
+        int counter=0;
         for (int i = 0; i < massivInnerClass.length && counter < 12; i++) {
             if (isContained(massivInnerClass[i].nameOfClass, start)) {
                 lnkd.add(massivInnerClass[i].nameOfClass);
+                counter++;
             }
         }
 
         long endTime = System.currentTimeMillis() - startTime;
         System.out.println("Время поиска в массиве объектов StringLong:" + endTime);
+
         if (lnkd.size() < 1) {
             return new String[]{"Classes not found"};
         }
@@ -65,28 +67,6 @@ public class MySearcher implements ISearcher {
         return foundedVariants;
     }
 
-    public String[] usingInnerClassGuess(String start) {
-        if (start == null || start.length() < 1 || start.length() > 32) {
-            return new String[]{"Classes not found"};
-        }
-
-        String[] foundedVariants = new String[12];
-        long startTime = System.currentTimeMillis();
-
-        int counter = 0;
-        for (int i = 0; i < massivInnerClass.length && counter < 12; i++) {
-            if (isContained(massivInnerClass[i].nameOfClass, start)) {
-                foundedVariants[counter++] = massivInnerClass[i].nameOfClass;
-            }
-        }
-
-        long endTime = System.currentTimeMillis() - startTime;
-        System.out.println("Время поиска в массиве объектов StringLong:" + endTime);
-        if (foundedVariants.length < 1) {
-            return new String[]{"Classes not found"};
-        }
-        return foundedVariants;
-    }
 
     public boolean isContained(String string, String founded) {
         if (string.length() >= founded.length()) {
